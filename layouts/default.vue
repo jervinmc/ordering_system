@@ -385,8 +385,14 @@ export default {
     };
   },
   methods: {
-    route(){
-      window.location.href="/merchant/orders"
+    route(link){
+      if(link =='login'){
+          window.location.href=`/${link}`
+      }
+      else{
+         window.location.href=`/merchant/${link}`
+      }
+     
     },
     async eventsGetall() {
       this.items_all=[]
