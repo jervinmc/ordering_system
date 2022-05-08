@@ -22,23 +22,35 @@
           </div>
         </v-col>
         <v-col cols="12" class="px-0">
-          <div>Sizes</div>
+          <v-row>
+            <v-col>
+              <div>Sizes</div>
+            </v-col>
+            <v-col align="end" cols="auto">
+                <v-row>
+                  <v-col>
+                     <div>
+                      <v-icon @click="removeSize">mdi-minus</v-icon>
+                    </div>
+                  </v-col>
+                    <v-col>
+                     <div>
+                      <v-icon @click="addSize">mdi-plus</v-icon>
+                    </div>
+                  </v-col>
+                </v-row>
+            </v-col>
+          </v-row>
           <div>
-            <v-checkbox
-              v-model="size_selected"
-              label="Small"
-              value="small"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="size_selected"
-              label="Medium"
-              value="medium"
-            ></v-checkbox>
-            <v-checkbox
-              v-model="size_selected"
-              label="Large"
-              value="large"
-            ></v-checkbox>
+              <v-row v-for="(x,index) in sizes_label" :key="index">
+                
+                  <v-col>
+                      <v-text-field label="Size" outlined v-model="sizes_label[index]"></v-text-field>
+                  </v-col>
+                  <v-col>
+                      <v-text-field label="Price" outlined v-model="sizes_price[index]"></v-text-field>
+                  </v-col> 
+              </v-row>
           </div>
         </v-col>
         <v-col cols="12" class="px-0">
@@ -118,6 +130,8 @@ export default {
   },
   data() {
     return {
+      sizes_label:[""],
+      sizes_price:[""],
       size_selected:[],
       quantity_temp: 0,
       room_list: ["Standard", "Deluxe", "Suite"],
@@ -127,6 +141,14 @@ export default {
     };
   },
   methods: {
+    addSize(){
+      this.sizes_label.push('')
+      this.sizes_price.push('')
+    },
+    removeSize(){
+      this.$delete(this.sizes_label,0)
+      this.$delete(this.sizes_price,0)
+    },
     async addEvents() {
       this.buttonLoad = true;
       try {
@@ -134,11 +156,14 @@ export default {
         if (this.image != null && this.image != "") {
           form_data.append("image", this.image);
         }
+        var size_label = []
         form_data.append("product_name", this.events.product_name);
         form_data.append("price", this.events.price);
         form_data.append("stocks", this.events.stocks);
 
         form_data.append("descriptions", this.events.descriptions);
+        form_data.append("size_label", this.sizes_label);
+        form_data.append("size_price", this.sizes_price);
         form_data.append("user_id", localStorage.getItem("id"));
         if (this.isAdd) {
           form_data.append("status", "Add");
