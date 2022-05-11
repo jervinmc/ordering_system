@@ -42,7 +42,7 @@
     <!-- <beneficiaries-add :isOpen="dialogAdd" @cancel="dialogAdd=false" @refresh="loadData" :items="selectedItem" :isAdd="isAdd" /> -->
     <v-row>
       <v-col align="start" class="pa-10 text-h5" >
-        <b>Order List</b>
+        <b>Sales Report</b>
       </v-col>
     
       <!-- <v-col align-self="center" align="end" class="pr-10" v-if="account_type!='Staff'">
@@ -70,6 +70,11 @@
       :items="items"
       :loading="isLoading"
     >
+    <template #[`item.users_profile`]="{ item }">
+          <div>
+          <v-img height="50" width="50" :src="item.users_profile"></v-img> 
+          </div>
+      </template>
      <template v-slot:[`item.is_active`]="{ item }">
         <div>
           <v-chip align="center" :style="getColorStatus(item.is_active)"
@@ -82,6 +87,12 @@
             {{formatPrice(item.price)}}
           </div>
       </template>
+      <template #[`item.total`]="{ item }">
+          <div>
+            {{formatPrice(item.price*item.quantity)}}
+          </div>
+      </template>
+      
       <template v-slot:loading>
         <v-skeleton-loader
           v-for="n in 5"
@@ -152,10 +163,13 @@ export default {
       headers: [
         { text: "ID", value: "id" },
         { text: "Product Name", value: "product_name" },
+        { text: "Full Name", value: "fullname" },
+        { text: "Address", value: "address" },
+        { text: "User's Picture", value: "users_profile" },
         { text: "Quantity", value: "quantity" },
         { text: "Price", value: "price" },
-        { text: "Status", value: "status" },
-        { text: "Action", value: "opt" },
+        { text: "Total", value: "subtotal" },
+        
         ,
       ],
     };

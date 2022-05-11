@@ -70,6 +70,11 @@
       :items="items"
       :loading="isLoading"
     >
+     <template #[`item.users_profile`]="{ item }">
+          <div>
+          <v-img height="50" width="50" :src="item.users_profile"></v-img> 
+          </div>
+      </template>
      <template v-slot:[`item.is_active`]="{ item }">
         <div>
           <v-chip align="center" :style="getColorStatus(item.is_active)"
@@ -140,8 +145,12 @@ export default {
       headers: [
         { text: "ID", value: "id" },
         { text: "Product Name", value: "product_name" },
+        { text: "Full Name", value: "fullname" },
+        { text: "Address", value: "address" },
+        { text: "User's Picture", value: "users_profile" },
         { text: "Quantity", value: "quantity" },
         { text: "Price", value: "price" },
+        { text: "Total", value: "subtotal" },
         { text: "Status", value: "status" },
         { text: "Action", value: "opt" },
         ,

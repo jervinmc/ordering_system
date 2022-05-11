@@ -200,12 +200,19 @@
               <v-list style="cursor:pointer">
            <v-list-item v-for="x in items_all" :key="x">
             <v-list-item-title><v-row>
-                <v-col @click="route">
+               <v-row>
+                 <v-col>
+                  <v-img height="50" width="50" :src="x.users_profile"></v-img>
+                 </v-col>
+                 <v-col align-self="center">
+                    <v-col @click="route('products')">
                   {{x.descriptions}}
                 </v-col>
                 <v-col>
                   {{x.date}}
                 </v-col>
+                 </v-col>
+               </v-row>
               </v-row></v-list-item-title>
           </v-list-item>
         </v-list>
@@ -343,39 +350,44 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "mdi-apps",
+          icon: "mdi-chart-ppf",
           title: "Products",
           to: "/merchant/products",
         },
-        {
-          icon: "mdi-chart-bubble",
+        { 
+          icon: "mdi-account-multiple",
           title: "Usermanagement",
           to: "/merchant/usermanagement",
         },
         {
-          icon: "mdi-apps",
+          icon: "mdi-clipboard-list-outline",
           title: "Orders",
           to: "/merchant/orders",
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-shopping",
           title: "Transaction",
           to: "/merchant/transactions",
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-chart-areaspline",
           title: "Inventory Report",
           to: "/merchant/inventory_report",
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-chart-bar",
           title: "Sales Report",
-          to: "/merchant/sales",
+          to: "/merchant/sales_report",
         },
         {
-          icon: "mdi-chart-bubble",
+          icon: "mdi-android-messages",
           title: "Messages",
           to: "/merchant/message",
+        },
+        {
+          icon: "mdi-comment-account",
+          title: "T-Account",
+          to: "/merchant/taccount",
         },
       ],
       miniVariant: false,

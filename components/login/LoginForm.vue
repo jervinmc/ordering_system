@@ -32,7 +32,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <v-card width="900">
+    <v-card width="500">
       <div
         style="background-color: #222f3e; color: white"
         align="center"

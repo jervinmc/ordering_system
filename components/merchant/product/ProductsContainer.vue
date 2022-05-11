@@ -1,24 +1,39 @@
 <template>
   <v-card elevation="5">
-     <v-dialog v-model="deleteConfirmation" width="500" persistent>
-    <v-card class="pa-10">
-    <div align="center" class="text-h6">Confirmation</div>
-    <div align="center" class="pa-10">
-        Are you sure you want to delete this item?
-    </div>
-      <v-card-actions>
-        <v-row align="center">
+    <v-dialog v-model="deleteConfirmation" width="500" persistent>
+      <v-card class="pa-10">
+        <div align="center" class="text-h6">Confirmation</div>
+        <div align="center" class="pa-10">
+          Are you sure you want to delete this item?
+        </div>
+        <v-card-actions>
+          <v-row align="center">
             <v-col align="end">
-                <v-btn color="red" text @click="deleteConfirmation=false"> Cancel </v-btn>
+              <v-btn color="red" text @click="deleteConfirmation = false">
+                Cancel
+              </v-btn>
             </v-col>
             <v-col>
-                <v-btn color="success" text :loading="buttonLoad" @click="deleteValue"> Confirm </v-btn>
+              <v-btn
+                color="success"
+                text
+                :loading="buttonLoad"
+                @click="deleteValue"
+              >
+                Confirm
+              </v-btn>
             </v-col>
-        </v-row>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
-    <products-add :isOpen="dialogAdd" @cancel="dialogAdd=false" @refresh="loadData" :items="selectedItem" :isAdd="isAdd"/>
+          </v-row>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <products-add
+      :isOpen="dialogAdd"
+      @cancel="dialogAdd = false"
+      @refresh="loadData"
+      :items="selectedItem"
+      :isAdd="isAdd"
+    />
     <v-row>
       <v-col align="start" class="pa-10 text-h5" cols="auto">
         <b>Product Management</b>
@@ -27,7 +42,7 @@
       <v-col align-self="center" align="end" class="pr-10">
         <v-btn
           class="rnd-btn"
-          rounded
+          
           large
           color="#222f3e"
           depressed
@@ -39,23 +54,27 @@
         </v-btn>
       </v-col>
     </v-row>
+    <div class="pa-5">
+      <v-text-field outlined v-model="search"></v-text-field>
+    </div>
     <v-data-table
       class="pa-5"
       :headers="headers"
       :items="events"
+      :search="search"
       :loading="isLoading"
     >
-     <template v-slot:[`item.status`]="{ item }">
+      <template v-slot:[`item.status`]="{ item }">
         <div>
           <v-chip align="center" :style="getColorStatus(item.status)"
             ><span>{{ item.status }} </span></v-chip
           >
         </div>
       </template>
-     <template #[`item.price`]="{ item }">
-          <div>
-            {{formatPrice(item.price)}}
-          </div>
+      <template #[`item.price`]="{ item }">
+        <div>
+          {{ formatPrice(item.price) }}
+        </div>
       </template>
       <template v-slot:loading>
         <v-skeleton-loader
@@ -65,8 +84,8 @@
           class="my-2"
         ></v-skeleton-loader>
       </template>
-         <template #[`item.image`]="{ item }">
-             <v-img :src="item.image" height="150" width="150"></v-img>
+      <template #[`item.image`]="{ item }">
+        <v-img :src="item.image" height="150" width="150"></v-img>
       </template>
       <template #[`item.opt`]="{ item }">
         <v-menu offset-y z-index="1">
@@ -94,28 +113,28 @@
 </template>
 
 <script>
-import ProductsAdd from './ProductsAdd.vue';
-
+import ProductsAdd from "./ProductsAdd.vue";
 
 export default {
-    components:{
-        ProductsAdd
-    },
+  components: {
+    ProductsAdd,
+  },
   created() {
     this.loadData();
   },
   data() {
     return {
-      buttonLoad:false,
-      account_type:'',
-      deleteConfirmation:false,
-      selectedItem:[],
-        events:[],
-      selectedItem:{},
+      search: "",
+      buttonLoad: false,
+      account_type: "",
+      deleteConfirmation: false,
+      selectedItem: [],
+      events: [],
+      selectedItem: {},
       isLoading: false,
       users: [],
-      dialogAdd:false,
-      isAdd:true,
+      dialogAdd: false,
+      isAdd: true,
       headers: [
         { text: "ID", value: "id" },
         { text: "Product Name", value: "product_name" },
@@ -123,55 +142,54 @@ export default {
         { text: "Stocks", value: "stocks" },
         { text: "Descriptions", value: "descriptions" },
         { text: "Image", value: "image" },
-        
-         { text: "Actions", value: "opt" },
+
+        { text: "Actions", value: "opt" },
         ,
       ],
     };
   },
   methods: {
-     getColorStatus(item) {
-    if (item == "Pending") {
+    getColorStatus(item) {
+      if (item == "Pending") {
         return "background-color:#FFF5CC;border-radius:15px;padding:7px; width:150px; color: #344557;";
-      }
-      else if(item =='Approved'){
-          return "background-color:green;border-radius:15px;padding:7px; width:150px; color:white;";
-      } else  { 
+      } else if (item == "Approved") {
+        return "background-color:green;border-radius:15px;padding:7px; width:150px; color:white;";
+      } else {
         return "background-color:red;border-radius:15px;padding:7px; width:150px; color: white;";
-      } 
-      
+      }
     },
-    async deleteValue(){
-     this.buttonLoad=true
-      this.$axios.delete(`/beneficiaries/${this.selectedItem.id}/`,{
-        headers:{
-          Authorization:`Bearer ${localStorage.getItem('token')}`
-        }
-      })
-      .then(()=>{
-          this.deleteConfirmation=false
-          this.buttonLoad=false
-          alert('Successfully Deleted!')
-          this.loadData()
-      })
+    async deleteValue() {
+      this.buttonLoad = true;
+      this.$axios
+        .delete(`/product/${this.selectedItem.id}/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(() => {
+          this.deleteConfirmation = false;
+          this.buttonLoad = false;
+          alert("Successfully Deleted!");
+          this.loadData();
+        });
     },
-     deleteItem(val){
-      this.selectedItem = val
-      this.deleteConfirmation=true
+    deleteItem(val) {
+      this.selectedItem = val;
+      this.deleteConfirmation = true;
     },
 
-     formatPrice(value) {
+    formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(",", ".");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
-    editItem(val){
-      this.selectedItem=val
-      this.dialogAdd=true
-      this.isAdd=false
+    editItem(val) {
+      this.selectedItem = val;
+      this.dialogAdd = true;
+      this.isAdd = false;
     },
-    addItem(){
-      this.isAdd=true
-      this.dialogAdd=true
+    addItem() {
+      this.isAdd = true;
+      this.dialogAdd = true;
     },
     async status(data, status) {
       this.isLoading = true;
@@ -192,13 +210,13 @@ export default {
         });
     },
     loadData() {
-      this.account_type=localStorage.getItem('account_type')
+      this.account_type = localStorage.getItem("account_type");
       this.eventsGetall();
     },
     async eventsGetall() {
       this.isLoading = true;
       const res = await this.$axios
-        .get(`/product_id/${localStorage.getItem('id')}/`, {
+        .get(`/product_id/${localStorage.getItem("id")}/`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -214,5 +232,4 @@ export default {
 </script>
 
 <style>
-
 </style>

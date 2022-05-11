@@ -12,17 +12,6 @@
               2022
             </b>
           </div>
-          <div class="my-10 white--text">
-            <v-btn
-              depressed
-              color="#6609af"
-              dark
-              @click="goToMarket"
-    
-            >
-              Sign Up Now
-            </v-btn>
-          </div>
         </v-col>
         <v-col>
             <!-- <v-img src="/car.jpg">

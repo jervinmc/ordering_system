@@ -2,7 +2,7 @@
   <v-form ref="form">
     <v-dialog v-model="isOpen" width="1000" persistent>
       <v-card class="pa-10">
-        <div align="center" class="text-h6">New Design</div>
+        <div align="center" class="text-h6">New Product</div>
         <v-col cols="12" class="px-0">
           <div>Product Name</div>
           <div>
@@ -207,14 +207,28 @@ export default {
                   "stocks",
                   this.events.stocks - this.quantity_temp
                 );
+                 form_data.append(
+                  "remaining_stocks",
+                  this.events.stocks
+                );
                 form_data.append("status", "Add");
-              } else if (this.quantity_temp == this.events.stocks) {
+              } 
+              else if (this.quantity_temp == this.events.stocks) {
+                this.$refs.form.reset();
+                  this.buttonLoad = false;
+                  this.$emit("cancel");
+                  this.$refs.form.reset();
+                  this.$emit("refresh");
                 return;
               } else {
                 form_data.delete("stocks");
                 form_data.append(
                   "stocks",
                   this.quantity_temp - this.events.stocks
+                );
+                form_data.append(
+                  "remaining_stocks",
+                  this.events.stocks
                 );
                 form_data.append("status", "Subtract");
               }

@@ -24,20 +24,7 @@
         <b>Inventory Report</b>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col align-self="center" align="end" class="pr-10">
-        <v-btn
-          class="rnd-btn"
-          rounded
-          large
-          color="#222f3e"
-          depressed
-          dark
-          width="190"
-          @click="addItem"
-        >
-          <span class="text-none">Add New Product</span>
-        </v-btn>
-      </v-col>
+     
     </v-row>
     <v-data-table
       class="pa-5"
@@ -117,7 +104,8 @@ export default {
         { text: "ID", value: "id" },
         { text: "Product Name", value: "product_name" },
         { text: "Status", value: "status" },
-        { text: "Quantity", value: "stocks" },
+        { text: "Stocks", value: "stocks" },
+        { text: "Remaining Stocks", value: "remaining_stocks" },
         ,
       ],
     };

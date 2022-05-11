@@ -40,7 +40,8 @@
                   <v-img :src="item.users.image"></v-img>
                 </v-list-item-avatar>
 
-                <v-list-item-content>
+                <div>
+                   <v-list-item-content>
                   <v-list-item-title
                     v-html="item.users.firstname"
                   ></v-list-item-title>
@@ -48,6 +49,8 @@
                     >A conversation between you and {{item.users.firstname}}</v-list-item-subtitle
                   >
                 </v-list-item-content>
+                </div>
+                <v-divider></v-divider>
               </v-list-item>
             </template>
           </v-list>
@@ -89,6 +92,7 @@
               @keyup.enter="sendMessage"
               hide-details=""
               v-model="message"
+              @click:append="sendMessage"
               append-icon="mdi-send"
             ></v-text-field>
                 </v-col>

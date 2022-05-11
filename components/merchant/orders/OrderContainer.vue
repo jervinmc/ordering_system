@@ -82,6 +82,11 @@
             {{formatPrice(item.price)}}
           </div>
       </template>
+      <template #[`item.users_profile`]="{ item }">
+          <div>
+          <v-img height="50" width="50" :src="item.users_profile"></v-img> 
+          </div>
+      </template>
       <template v-slot:loading>
         <v-skeleton-loader
           v-for="n in 5"
@@ -152,8 +157,12 @@ export default {
       headers: [
         { text: "ID", value: "id" },
         { text: "Product Name", value: "product_name" },
+        { text: "Full Name", value: "fullname" },
+        { text: "Address", value: "address" },
+        { text: "User's Picture", value: "users_profile" },
         { text: "Quantity", value: "quantity" },
         { text: "Price", value: "price" },
+        { text: "Total", value: "subtotal" },
         { text: "Status", value: "status" },
         { text: "Action", value: "opt" },
         ,
