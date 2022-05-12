@@ -350,6 +350,11 @@ export default {
       fixed: false,
       items: [
         {
+          icon: "mdi-home-analytics",
+          title: "Dashboard",
+          to: "/merchant/dashboard",
+        },
+        {
           icon: "mdi-chart-ppf",
           title: "Products",
           to: "/merchant/products",

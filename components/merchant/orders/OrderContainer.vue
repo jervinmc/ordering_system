@@ -162,6 +162,8 @@ export default {
         { text: "User's Picture", value: "users_profile" },
         { text: "Quantity", value: "quantity" },
         { text: "Price", value: "price" },
+        { text: "Size", value: "size" },
+        { text: "Color", value: "color" },
         { text: "Total", value: "subtotal" },
         { text: "Status", value: "status" },
         { text: "Action", value: "opt" },

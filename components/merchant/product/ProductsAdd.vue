@@ -2,7 +2,7 @@
   <v-form ref="form">
     <v-dialog v-model="isOpen" width="1000" persistent>
       <v-card class="pa-10">
-        <div align="center" class="text-h6">New Design</div>
+        <div align="center" class="text-h6">New Product</div>
         <v-col cols="12" class="px-0">
           <div>Product Name</div>
           <div>
@@ -27,30 +27,69 @@
               <div>Sizes</div>
             </v-col>
             <v-col align="end" cols="auto">
-                <v-row>
-                  <v-col>
-                     <div>
-                      <v-icon @click="removeSize">mdi-minus</v-icon>
-                    </div>
-                  </v-col>
-                    <v-col>
-                     <div>
-                      <v-icon @click="addSize">mdi-plus</v-icon>
-                    </div>
-                  </v-col>
-                </v-row>
+              <v-row>
+                <v-col>
+                  <div>
+                    <v-icon @click="removeSize">mdi-minus</v-icon>
+                  </div>
+                </v-col>
+                <v-col>
+                  <div>
+                    <v-icon @click="addSize">mdi-plus</v-icon>
+                  </div>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
           <div>
-              <v-row v-for="(x,index) in sizes_label" :key="index">
-                
-                  <v-col>
-                      <v-text-field label="Size" outlined v-model="sizes_label[index]"></v-text-field>
-                  </v-col>
-                  <v-col>
-                      <v-text-field label="Price" outlined v-model="sizes_price[index]"></v-text-field>
-                  </v-col> 
+            <v-row v-for="(x, index) in sizes_label" :key="index">
+              <v-col>
+                <v-text-field
+                  label="Size"
+                  outlined
+                  v-model="sizes_label[index]"
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  label="Price"
+                  outlined
+                  v-model="sizes_price[index]"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+        <v-col cols="12" class="px-0">
+          <v-row>
+            <v-col>
+              <div>Color</div>
+            </v-col>
+            <v-col align="end" cols="auto">
+              <v-row>
+                <v-col>
+                  <div>
+                    <v-icon @click="removeColor">mdi-minus</v-icon>
+                  </div>
+                </v-col>
+                <v-col>
+                  <div>
+                    <v-icon @click="addColor">mdi-plus</v-icon>
+                  </div>
+                </v-col>
               </v-row>
+            </v-col>
+          </v-row>
+          <div>
+            <v-row v-for="(x, index) in color_label" :key="index">
+              <v-col>
+                <v-text-field
+                  label="Color"
+                  outlined
+                  v-model="color_label[index]"
+                ></v-text-field>
+              </v-col>
+            </v-row>
           </div>
         </v-col>
         <v-col cols="12" class="px-0">
@@ -130,24 +169,31 @@ export default {
   },
   data() {
     return {
-      sizes_label:[""],
-      sizes_price:[""],
-      size_selected:[],
+      sizes_label: [""],
+      sizes_price: [""],
+      size_selected: [],
       quantity_temp: 0,
       room_list: ["Standard", "Deluxe", "Suite"],
       events: [],
       buttonLoad: false,
+      color_label: [""],
       img_holder: "image_placeholder.png",
     };
   },
   methods: {
-    addSize(){
-      this.sizes_label.push('')
-      this.sizes_price.push('')
+    addColor() {
+      this.color_label.push("");
     },
-    removeSize(){
-      this.$delete(this.sizes_label,0)
-      this.$delete(this.sizes_price,0)
+    removeColor() {
+      this.$delete(this.color_label, 0);
+    },
+    addSize() {
+      this.sizes_label.push("");
+      this.sizes_price.push("");
+    },
+    removeSize() {
+      this.$delete(this.sizes_label, 0);
+      this.$delete(this.sizes_price, 0);
     },
     async addEvents() {
       this.buttonLoad = true;
@@ -156,13 +202,14 @@ export default {
         if (this.image != null && this.image != "") {
           form_data.append("image", this.image);
         }
-        var size_label = []
+        var size_label = [];
         form_data.append("product_name", this.events.product_name);
         form_data.append("price", 25);
         form_data.append("stocks", this.events.stocks);
 
         form_data.append("descriptions", this.events.descriptions);
         form_data.append("size_label", this.sizes_label);
+        form_data.append("color_label", this.color_label);
         form_data.append("size_price", this.sizes_price);
         form_data.append("user_id", localStorage.getItem("id"));
         if (this.isAdd) {
@@ -194,7 +241,7 @@ export default {
                 });
             });
         } else {
-          alert()
+          alert();
           const response = await this.$axios
             .patch(`/product/${this.events.id}/`, form_data, {
               headers: {
@@ -208,18 +255,14 @@ export default {
                   "stocks",
                   this.events.stocks - this.quantity_temp
                 );
-                 form_data.append(
-                  "remaining_stocks",
-                  this.events.stocks
-                );
+                form_data.append("remaining_stocks", this.events.stocks);
                 form_data.append("status", "Add");
-              } 
-              else if (this.quantity_temp == this.events.stocks) {
+              } else if (this.quantity_temp == this.events.stocks) {
                 this.$refs.form.reset();
-                  this.buttonLoad = false;
-                  this.$emit("cancel");
-                  this.$refs.form.reset();
-                  this.$emit("refresh");
+                this.buttonLoad = false;
+                this.$emit("cancel");
+                this.$refs.form.reset();
+                this.$emit("refresh");
                 return;
               } else {
                 form_data.delete("stocks");
@@ -227,10 +270,7 @@ export default {
                   "stocks",
                   this.quantity_temp - this.events.stocks
                 );
-                form_data.append(
-                  "remaining_stocks",
-                  this.events.stocks
-                );
+                form_data.append("remaining_stocks", this.events.stocks);
                 form_data.append("status", "Subtract");
               }
               // this.buttonLoad = false;

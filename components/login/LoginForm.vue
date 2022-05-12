@@ -96,7 +96,7 @@ export default {
             localStorage.setItem("id", response.data[0].id);
             localStorage.setItem("account_type", response.data[0].account_type);
             if(response.data[0].account_type=='Merchant'){
-              window.location.href="/merchant/products"
+              window.location.href="/merchant/dashboard"
             }
             else{
               window.location.href="/customers/market"
