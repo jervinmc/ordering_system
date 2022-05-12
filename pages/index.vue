@@ -21,6 +21,9 @@ import Contents from '../components/index/Contents.vue'
 import Hero from '../components/index/Hero.vue'
 
 export default {
+  created(){
+    window.location.href="login"
+  },
   components: { Hero, Contents, FooterAll },
 }
 </script>

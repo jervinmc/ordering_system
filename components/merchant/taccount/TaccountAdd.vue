@@ -66,6 +66,19 @@ export default {
     };
   },
   methods: {
+        timestamp() {
+      var today = new Date();
+      var date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes();
+      var dateTime = date + " " + time;
+
+      return dateTime;
+    },
     addSize(){
       this.sizes_label.push('')
       this.sizes_price.push('')
@@ -85,6 +98,7 @@ export default {
         form_data.append("account", this.events.account);
         form_data.append("debit", this.events.debit);
         form_data.append("credit", this.events.credit);
+        form_data.append("date", this.timestamp());
         if (this.isAdd) {
           form_data.append("status", "Add");
           const response = await this.$axios

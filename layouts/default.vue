@@ -115,12 +115,12 @@
         @click="route('index')"
       ></v-img>
       <v-spacer></v-spacer>
-      <v-toolbar-title
+      <!-- <v-toolbar-title
         class="px-4 black--text"
         style="cursor: pointer; font-size: 16px"
         @click="route('index')"
         ><v-icon class="pb-1">mdi-home</v-icon>Home</v-toolbar-title
-      >
+      > -->
       <!-- <v-toolbar-title
         class="px-4 black--text"
         style="cursor: pointer; font-size: 16px"

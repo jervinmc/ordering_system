@@ -2,7 +2,7 @@
   <v-form ref="form">
     <v-dialog v-model="isOpen" width="1000" persistent>
       <v-card class="pa-10">
-        <div align="center" class="text-h6">New Product</div>
+        <div align="center" class="text-h6">New Design</div>
         <v-col cols="12" class="px-0">
           <div>Product Name</div>
           <div>
@@ -158,7 +158,7 @@ export default {
         }
         var size_label = []
         form_data.append("product_name", this.events.product_name);
-        form_data.append("price", this.events.price);
+        form_data.append("price", 25);
         form_data.append("stocks", this.events.stocks);
 
         form_data.append("descriptions", this.events.descriptions);
@@ -194,6 +194,7 @@ export default {
                 });
             });
         } else {
+          alert()
           const response = await this.$axios
             .patch(`/product/${this.events.id}/`, form_data, {
               headers: {

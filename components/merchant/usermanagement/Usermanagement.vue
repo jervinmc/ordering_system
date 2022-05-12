@@ -70,13 +70,12 @@
       :items="events"
       :loading="isLoading"
     >
-     <template v-slot:[`item.is_active`]="{ item }">
+     <!-- <template v-slot:[`item.status`]="{ item }">
         <div>
-          <v-chip align="center" :style="getColorStatus(item.is_active)"
-            ><span>{{ item.is_active ? 'Activated' : 'Deactivated' }} </span></v-chip
-          >
+        <span>{{ item.is_active ? 'Activated' : 'Deactivated' }} </span>
+          
         </div>
-      </template>
+      </template> -->
      <template #[`item.price`]="{ item }">
           <div>
             {{formatPrice(item.price)}}
@@ -143,7 +142,7 @@ export default {
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
         { text: "Email", value: "email" },
-        { text: "Status", value: "is_active" },
+        { text: "Status", value: "status" },
         { text: "Action", value: "opt" },
         ,
       ],
@@ -152,8 +151,8 @@ export default {
   methods: {
       status(item,status){
     this.buttonLoad=true
-      this.$axios.patch(`/users/user/${item.id}/`,{
-          is_active: status=='activate' ? true : false
+      this.$axios.patch(`/users/${item.id}/`,{
+          status: status=='activate' ? 'Activate' : 'Deactivated'
       },{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`

@@ -157,7 +157,7 @@ export default {
       isAdd: true,
       headers: [
         { text: "ID", value: "id" },
-        { text: "Date", value: "product_name" },
+        { text: "Date", value: "date" },
         { text: "Description", value: "account" },
         { text: "Debit", value: "debit" },
         { text: "Credit", value: "credit" },

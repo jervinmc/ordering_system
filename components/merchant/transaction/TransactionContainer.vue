@@ -143,7 +143,7 @@ export default {
       isCategory:false,
       isAdd:true,
       headers: [
-        { text: "ID", value: "id" },
+        { text: "Transaction Order", value: "id" },
         { text: "Product Name", value: "product_name" },
         { text: "Full Name", value: "fullname" },
         { text: "Address", value: "address" },
