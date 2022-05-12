@@ -106,13 +106,13 @@
       </v-col> -->
 
         <v-col>
-          <span class="pt-2 pr-10 pb-10"
+          <!-- <span class="pt-2 pr-10 pb-10"
             ><b
               >Upload Image<v-icon @click="$refs.file.click()"
                 >mdi-plus</v-icon
               ></b
             ></span
-          >
+          > -->
 
           <div class="hover_pointer pt-10">
             <img
@@ -165,6 +165,37 @@ export default {
       this.events = this.items;
       this.img_holder = this.items.image;
       this.quantity_temp = this.items.stocks;
+      this.isLoading = true;
+      const res =  this.$axios
+        .get(`/size_product/${this.events.id}/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          this.sizes_label=['']
+          console.log(res.data);
+          for(let key in res.data){
+            this.sizes_label[key] = res.data[key]['label']
+            this.sizes_price[key] = res.data[key]['price']
+           
+          }
+        });
+        const res1 =  this.$axios
+        .get(`/color_product/${this.events.id}/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res1) => {
+          this.color_label=['']
+          console.log(res1.data);
+          for(let key in res1.data){
+          this.color_label[key] = res1.data[key]['label']
+           
+          }
+        });
+         
     },
   },
   data() {
@@ -177,7 +208,7 @@ export default {
       events: [],
       buttonLoad: false,
       color_label: [""],
-      img_holder: "image_placeholder.png",
+      img_holder: "/image_placeholder.png",
     };
   },
   methods: {
@@ -241,7 +272,20 @@ export default {
                 });
             });
         } else {
-          alert();
+          const response2 = await this.$axios
+            .post("/size_product_edit/", {
+              "product_id":this.events.id,
+              "size_label":this.sizes_label,
+              "size_price":this.sizes_price,
+              "color_label":this.color_label
+            }, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            })
+            .then(() => {
+           
+            });
           const response = await this.$axios
             .patch(`/product/${this.events.id}/`, form_data, {
               headers: {
@@ -289,6 +333,7 @@ export default {
                   this.$emit("cancel");
                   this.$refs.form.reset();
                   this.$emit("refresh");
+                  
                 });
             });
         }

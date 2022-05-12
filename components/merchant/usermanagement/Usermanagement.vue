@@ -70,6 +70,11 @@
       :items="events"
       :loading="isLoading"
     >
+     <template #[`item.image`]="{ item }">
+          <div>
+          <v-img height="50" width="50" :src="item.image"></v-img> 
+          </div>
+      </template>
      <!-- <template v-slot:[`item.status`]="{ item }">
         <div>
         <span>{{ item.is_active ? 'Activated' : 'Deactivated' }} </span>
@@ -98,12 +103,12 @@
             </v-btn>
           </template>
           <v-list dense>
-            <v-list-item @click.stop="status(item,'activate')">
+            <v-list-item @click.stop="status(item,'Activated')">
               <v-list-item-content>
                 <v-list-item-title>Activate</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item @click.stop="status(item,'deactivate')">
+            <v-list-item @click.stop="status(item,'Deactivated')">
               <v-list-item-content>
                 <v-list-item-title>Deactivate</v-list-item-title>
               </v-list-item-content>
@@ -142,6 +147,7 @@ export default {
         { text: "Firstname", value: "firstname" },
         { text: "Lastname", value: "lastname" },
         { text: "Email", value: "email" },
+        { text: "Image", value: "image" },
         { text: "Status", value: "status" },
         { text: "Action", value: "opt" },
         ,
@@ -152,7 +158,7 @@ export default {
       status(item,status){
     this.buttonLoad=true
       this.$axios.patch(`/users/${item.id}/`,{
-          status: status=='activate' ? 'Activate' : 'Deactivated'
+          status:status
       },{
         headers:{
           Authorization:`Bearer ${localStorage.getItem('token')}`
