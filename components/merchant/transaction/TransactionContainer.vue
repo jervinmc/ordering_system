@@ -147,6 +147,8 @@ export default {
         { text: "Product Name", value: "product_name" },
         { text: "Full Name", value: "fullname" },
         { text: "Address", value: "address" },
+        { text: "Size", value: "size" },
+        { text: "Color", value: "color" },
         { text: "User's Picture", value: "users_profile" },
         { text: "Quantity", value: "quantity" },
         { text: "Price", value: "price" },
