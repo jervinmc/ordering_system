@@ -332,6 +332,7 @@
 </template>
 
 <script>
+import Pusher from 'pusher-js';
 export default {
   name: "DefaultLayout",
   created(){
