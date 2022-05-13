@@ -4,9 +4,9 @@
       <div class="text-h5">
         <b>Welcome to our dashboard</b>
       </div>
-      <div class="pb-5">
+      <!-- <div class="pb-5">
         Good Morning! We have 3 new active cases for today.
-      </div>
+      </div> -->
     </div>
     <v-row>
       <!-- <v-col>
