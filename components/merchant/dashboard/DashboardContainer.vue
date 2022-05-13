@@ -105,7 +105,7 @@
           </v-col>
         </v-row>
         <div class="pt-5">
-          <v-card class="rounded-xl pa-5" elevation="5">
+          <!-- <v-card class="rounded-xl pa-5" elevation="5">
             <div class="text-h6 pb-5">
               <b>Sales</b>
             </div>
@@ -117,23 +117,10 @@
               </div>
             <div>
                <div v-if="!loadData">
-                      <!-- <v-row>
-                        <v-col>
-                          <div>
-                            Age:
-                          </div>
-                            <VueApexCharts height="300" :options="chartOptionsPieAge" :series="pie_series_age"></VueApexCharts>
-                        </v-col>
-                        <v-col>
-                          <div>
-                            Gender:
-                          </div>
-                            <VueApexCharts height="300" :options="chartOptionsPieGender" :series="pie_series_gender"></VueApexCharts>
-                        </v-col>
-                      </v-row> -->
+              
               </div>
             </div>
-          </v-card>
+          </v-card> -->
         </div>
       </v-col>
     </v-row>
@@ -191,12 +178,12 @@
 
 <script>
 // import VueBarGraph from "vue-bar-graph";
-import VueApexCharts from "vue-apexcharts";
+// import VueApexCharts from "vue-apexcharts";
 
 export default {
-    components:{
-        VueApexCharts
-    },
+    // components:{
+    //     VueApexCharts
+    // },
   computed:{
     total_active(){
      var total = this.items_all.filter(data=>data.status=='Active')
