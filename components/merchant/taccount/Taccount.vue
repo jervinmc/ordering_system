@@ -1,5 +1,32 @@
 <template>
   <div class="pa-10">
+     <v-dialog v-model="deleteConfirmation" width="500" persistent>
+      <v-card class="pa-10">
+        <div align="center" class="text-h6">Confirmation</div>
+        <div align="center" class="pa-10">
+          Are you sure you want to delete this item?
+        </div>
+        <v-card-actions>
+          <v-row align="center">
+            <v-col align="end">
+              <v-btn color="red" text @click="deleteConfirmation = false">
+                Cancel
+              </v-btn>
+            </v-col>
+            <v-col>
+              <v-btn
+                color="success"
+                text
+                :loading="buttonLoad"
+                @click="deleteValue"
+              >
+                Confirm
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-row>
       <v-col>
         <div class="text-h5 pb-5">
@@ -108,14 +135,14 @@
                   </v-btn>
                 </template>
                 <v-list dense>
-                  <v-list-item @click.stop="status(item, 'Accept')">
+                  <v-list-item @click.stop="editItem(item)">
                     <v-list-item-content>
-                      <v-list-item-title>Accept</v-list-item-title>
+                      <v-list-item-title>Edit</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
-                  <v-list-item @click.stop="status(item, 'Decline')">
+                  <v-list-item @click.stop="deleteItem(item)">
                     <v-list-item-content>
-                      <v-list-item-title>Decline</v-list-item-title>
+                      <v-list-item-title>Delete</v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                   <!-- <v-list-item @click.stop="status(item,'to receive')">
@@ -179,7 +206,7 @@ export default {
     async deleteValue() {
       this.buttonLoad = true;
       this.$axios
-        .delete(`/product/${this.selectedItem.id}/`, {
+        .delete(`/taccount/${this.selectedItem.id}/`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -242,6 +269,8 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.events = res.data;
+          this.total_debit = 0
+          this.total_credit = 0
           for(let key in this.events){
             this.total_debit = this.total_debit +parseInt( this.events[key].debit)
              this.total_credit = this.total_credit + parseInt(this.events[key].credit)

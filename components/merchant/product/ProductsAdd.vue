@@ -118,7 +118,7 @@
             <img
               @click="$refs.file.click()"
               :src="img_holder"
-              alt="item_.js"
+              alt="Click to upload image."
               height="150"
               width="150"
               class="mb-0"

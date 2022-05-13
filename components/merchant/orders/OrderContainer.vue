@@ -82,6 +82,12 @@
             {{formatPrice(item.price)}}
           </div>
       </template>
+      <template #[`item.subtotal`]="{ item }">
+          <div>
+            {{formatPrice(item.price * item.quantity)}}
+          </div>
+      </template>
+      
       <template #[`item.users_profile`]="{ item }">
           <div>
           <v-img height="50" width="50" :src="item.users_profile"></v-img> 
