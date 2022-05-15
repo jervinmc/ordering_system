@@ -197,7 +197,8 @@
             </v-row>
            </v-toolbar-title>
         </template>
-              <v-list style="cursor:pointer">
+          <v-card height="400">
+                 <v-list style="cursor:pointer">
            <v-list-item v-for="x in items_all" :key="x">
             <v-list-item-title><v-row>
                <v-row>
@@ -216,6 +217,7 @@
               </v-row></v-list-item-title>
           </v-list-item>
         </v-list>
+          </v-card>
       </v-menu>
        </v-col>
     </v-row>

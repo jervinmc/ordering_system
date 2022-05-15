@@ -235,7 +235,7 @@ export default {
         }
         var size_label = [];
         form_data.append("product_name", this.events.product_name);
-        form_data.append("price", 25);
+        form_data.append("price", this.events.price);
         form_data.append("stocks", this.events.stocks);
 
         form_data.append("descriptions", this.events.descriptions);
@@ -244,6 +244,7 @@ export default {
         form_data.append("size_price", this.sizes_price);
         form_data.append("user_id", localStorage.getItem("id"));
         if (this.isAdd) {
+          form_data.append("remaining_stocks", this.events.stocks);
           form_data.append("status", "Add");
           const response = await this.$axios
             .post("/product/", form_data, {
