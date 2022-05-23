@@ -206,7 +206,7 @@
                   <v-img height="50" width="50" :src="x.users_profile"></v-img>
                  </v-col>
                  <v-col align-self="center">
-                    <v-col @click="route('products')">
+                    <v-col @click="route(x.module)">
                   {{x.descriptions}}
                 </v-col>
                 <v-col>

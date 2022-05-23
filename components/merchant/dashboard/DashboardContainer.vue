@@ -4,9 +4,22 @@
       <div class="text-h5">
         <b>Welcome to our dashboard</b>
       </div>
+
       <!-- <div class="pb-5">
         Good Morning! We have 3 new active cases for today.
       </div> -->
+    </div>
+    <div class="pa-10">
+      <v-card class="rounded-xl" elevation="5">
+          <v-carousel height="400">
+            <v-carousel-item
+              v-for="(item,i) in carousels"
+              :key="i"
+              :src="item.src"
+         
+            ></v-carousel-item>
+          </v-carousel>
+      </v-card>
     </div>
     <v-row>
       <!-- <v-col>
@@ -211,6 +224,20 @@ export default {
   },
   data() {
     return {
+      carousels: [
+        {
+          src: '/1.jpeg',
+        },
+        {
+          src: '/2.jpeg',
+        },
+        {
+          src: '/3.jpeg',
+        },
+        {
+          src: '/4.png',
+        },
+      ],
         sales:0.0,
         products:0,
         customers:0,
