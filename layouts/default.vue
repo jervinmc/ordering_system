@@ -170,12 +170,138 @@
         ><v-icon class="pb-1">mdi-plus</v-icon> Register</v-toolbar-title
       > -->
     </v-app-bar>
-    <v-app-bar  color="#222f3e" :clipped-left="clipped" fixed app elevation="1" v-else-if="account_type=='Merchant'" >
+    <v-app-bar
+
+      color="white"
+      :clipped-left="clipped"
+      fixed
+      app
+      elevation="1"
+          v-if="account_type=='Merchant'"
+    >
+      <v-img
+        src="/logo.png"
+        height="60"
+        width="60"
+        contain
+        style="cursor: pointer"
+        @click="route('index')"
+      ></v-img>
+      <v-spacer></v-spacer>
+      <v-toolbar-title
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('dashboard')"
+        ><v-icon class="pb-1">mdi-home</v-icon>Dashboard</v-toolbar-title
+      >
+      <v-toolbar-title
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('products')"
+        ><v-icon class="pb-1">mdi-chart-ppf</v-icon>Products</v-toolbar-title
+      >
+      <v-toolbar-title
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('usermanagement')"
+        ><v-icon class="pb-1">mdi-account-multiple</v-icon> Users</v-toolbar-title
+      >
+      <v-toolbar-title
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('orders')"
+        ><v-icon class="pb-1">mdi-clipboard-list-outline</v-icon>Orders</v-toolbar-title
+      >
+      <v-toolbar-title
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('transactions')"
+        ><v-icon class="pb-1">mdi-shopping</v-icon>Transactions</v-toolbar-title
+      >
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+         <v-toolbar-title
+        class="px-4 black--text"
+         v-on="on" v-bind="attrs"
+        style="cursor: pointer; font-size: 16px"
+        ><v-icon class="pb-1">mdi-chart-bar</v-icon>Reports</v-toolbar-title
+      >
+        </template>
+              <v-list>
+        
+          <v-list-item @click="route('inventory_report')">
+            <v-list-item-title>Inventory Report</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="route('sales_report')">
+            <v-list-item-title>Sales Report</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      <v-toolbar-title
+        v-if="token == null"
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('message')"
+        ><v-icon class="pb-1">mdi-android-messages</v-icon>Messages</v-toolbar-title
+      >
+      <v-toolbar-title
+        v-if="token == null"
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="route('taccount')"
+        ><v-icon class="pb-1">mdi-comment-account</v-icon> T-Account</v-toolbar-title
+      >
+            <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-toolbar-title class="px-4 white--text" v-on="on" v-bind="attrs" style="cursor:pointer">
+            <v-row>
+            
+              <v-col class="pb-5" cols="auto">
+                      <v-icon @click="hitNotif" color="black">mdi-bell</v-icon>
+              </v-col>
+                <v-col class="px-0 red--text" v-if="total_unseen!=0">
+                  {{total_unseen}}
+              </v-col>
+            </v-row>
+           </v-toolbar-title>
+        </template>
+          <v-card height="400">
+                 <v-list style="cursor:pointer">
+           <v-list-item v-for="x in items_all" :key="x">
+            <v-list-item-title><v-row>
+               <v-row>
+                 <v-col>
+                  <v-img height="50" width="50" :src="x.users_profile"></v-img>
+                 </v-col>
+                 <v-col align-self="center">
+                    <v-col @click="route(x.module)">
+                  {{x.descriptions}}
+                </v-col>
+                <v-col>
+                  {{x.date}}
+                </v-col>
+                 </v-col>
+               </v-row>
+              </v-row></v-list-item-title>
+          </v-list-item>
+        </v-list>
+          </v-card>
+      </v-menu>
+      <v-toolbar-title
+        v-if="token == null"
+        class="px-4 black--text"
+        style="cursor: pointer; font-size: 16px"
+        @click="logout"
+        ><v-icon class="pb-1">mdi-logout</v-icon>Log out</v-toolbar-title
+      >
+      <div class="pl-16"></div>
+      
+     
+      
+    </v-app-bar>
+    <!-- <v-app-bar  color="#222f3e" :clipped-left="clipped" fixed app elevation="1" v-else-if="account_type=='Merchant'" >
     <v-app-bar-nav-icon @click="drawer=true" color="white"></v-app-bar-nav-icon>
     <v-row>
-      <!-- <v-col cols="auto">
-        <v-img src="/logo.png" height="60" width="60" contain style="cursor:pointer" @click="route('index')"></v-img>
-      </v-col> -->
   
       <v-col  align-self="center" cols="auto">
         <div class="white--text">
@@ -224,7 +350,7 @@
     <div class="white--text">
       {{$route.name=='admin-configuration' ? 'System Configuration' : ''}}
     </div>
-    </v-app-bar>
+    </v-app-bar> -->
     <v-main>
       <v-container class="pa-0" fluid>
         <Nuxt />
@@ -266,69 +392,6 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
-      <!-- <v-list nav dense  v-else>
-        <v-list-item-group active-class="primary" color="white">
-          <v-list-item
-        
-          color="white"
-            :to="items_client[index].to"
-            v-for="(key, index) in items_client"
-            :key="index"
-          > 
-            <v-icon class="pr-2" color="white">{{ items_client[index].icon }}</v-icon>
-            <v-list-item-title style="color:white">{{ items_client[index].title }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item
-          color="white"
-          @click="logout"
-          > 
-            <v-icon class="pr-2" color="white">mdi-logout</v-icon>
-            <v-list-item-title style="color:white">Logout</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list> -->
-      <!-- <v-list nav dense   v-if="account_type=='Seller'">
-        <v-list-item-group active-class="primary" color="white">
-          <v-list-item
-        
-          color="white"
-            :to="items_seller[index].to"
-            v-for="(key, index) in items_seller"
-            :key="index"
-          > 
-            <v-icon class="pr-2" color="white">{{ items_seller[index].icon }}</v-icon>
-            <v-list-item-title style="color:white">{{ items_seller[index].title }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item
-          color="white"
-          @click="logout"
-          > 
-            <v-icon class="pr-2" color="white">mdi-logout</v-icon>
-            <v-list-item-title style="color:white">Logout</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list> -->
-      <!-- <v-list nav dense   >
-        <v-list-item-group active-class="primary" color="white">
-          <v-list-item
-        
-          color="white"
-            :to="items_customer[index].to"
-            v-for="(key, index) in items_customer"
-            :key="index"
-          > 
-            <v-icon class="pr-2" color="white">{{ items_customer[index].icon }}</v-icon>
-            <v-list-item-title style="color:white">{{ items_customer[index].title }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item
-          color="white"
-          @click="logout"
-          > 
-            <v-icon class="pr-2" color="white">mdi-logout</v-icon>
-            <v-list-item-title style="color:white">Logout</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list> -->
     </v-navigation-drawer>
   </v-app>
 </template>
