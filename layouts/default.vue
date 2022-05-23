@@ -180,12 +180,12 @@
           v-if="account_type=='Merchant'"
     >
       <v-img
-        src="/logo.png"
+        src="/logo_e.png"
         height="60"
         width="60"
         contain
         style="cursor: pointer"
-        @click="route('index')"
+        @click="route('dashboard')"
       ></v-img>
       <v-spacer></v-spacer>
       <v-toolbar-title
@@ -282,7 +282,9 @@
                 </v-col>
                  </v-col>
                </v-row>
-              </v-row></v-list-item-title>
+              </v-row>
+              <v-divider></v-divider>
+              </v-list-item-title>
           </v-list-item>
         </v-list>
           </v-card>

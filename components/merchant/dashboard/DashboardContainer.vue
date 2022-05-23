@@ -62,7 +62,7 @@
       </v-col> -->
       <v-col>
         <v-row>
-          <v-col>
+          <!-- <v-col cols="12">
             <v-card
               color="#7da0fa"
               height="120"
@@ -74,8 +74,8 @@
                 <b> {{0}}</b>
               </div>
             </v-card>
-          </v-col>
-          <v-col>
+          </v-col> -->
+          <v-col cols="12">
             <v-card
               color="#4747a1"
               height="120"
@@ -90,7 +90,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col>
+          <v-col cols="12">
             <v-card
               color="#7978e9"
               height="120"
@@ -103,7 +103,7 @@
               </div>
             </v-card>
           </v-col>
-          <v-col>
+          <v-col cols="12">
             <v-card
               color="#f3797e"
               height="120"
@@ -226,17 +226,15 @@ export default {
     return {
       carousels: [
         {
+          src: '/3.jpeg',
+        },
+        {
           src: '/1.jpeg',
         },
         {
           src: '/2.jpeg',
         },
-        {
-          src: '/3.jpeg',
-        },
-        {
-          src: '/4.png',
-        },
+        
       ],
         sales:0.0,
         products:0,

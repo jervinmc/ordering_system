@@ -48,9 +48,11 @@
                   <v-list-item-subtitle
                     >A conversation between you and {{item.users.firstname}}</v-list-item-subtitle
                   >
+                   <v-divider></v-divider>
                 </v-list-item-content>
+                
                 </div>
-                <v-divider></v-divider>
+               
               </v-list-item>
             </template>
           </v-list>
