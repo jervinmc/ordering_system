@@ -9,12 +9,12 @@
             <v-text-field outlined v-model="events.account"></v-text-field>
           </div>
         </v-col>
-        <v-col cols="12" class="px-0">
+        <!-- <v-col cols="12" class="px-0">
           <div>Debit</div>
           <div>
             <v-text-field outlined v-model="events.debit"></v-text-field>
           </div>
-        </v-col>
+        </v-col> -->
         <v-col cols="12" class="px-0">
           <div>Credit</div>
           <div>
@@ -96,7 +96,6 @@ export default {
         }
         var size_label = []
         form_data.append("account", this.events.account);
-        form_data.append("debit", this.events.debit);
         form_data.append("credit", this.events.credit);
         form_data.append("date", this.timestamp());
         if (this.isAdd) {

@@ -44,6 +44,7 @@
       <v-col align="start" class="pa-10 text-h5" >
         <b>Sales Report</b>
       </v-col>
+      
     
       <!-- <v-col align-self="center" align="end" class="pr-10" v-if="account_type!='Staff'">
         <v-btn
@@ -63,6 +64,11 @@
       <v-col align-self="center" class="pa-10 ">
         <v-text-field placeholder="search" outlined v-model="search"></v-text-field>
       </v-col>
+          <JsonExcel :data="items">
+    <div class="text-6 pl-5" style="cursor:pointer">
+      <b>download report</b>
+    </div>
+    </JsonExcel>
     <v-data-table
       class="pa-5"
       :search="search"
@@ -138,11 +144,14 @@
 </template>
 
 <script>
-
+import JsonExcel from "vue-json-excel";
 
 export default {
   created() {
     this.loadData();
+  },
+  components:{
+    JsonExcel
   },
  computed:{
      items(){

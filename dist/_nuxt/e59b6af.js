@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[46],{623:function(e,t,n){"use strict";n.r(t);var l={components:{SalesReport:n(605).default}},o=n(97),component=Object(o.a)(l,(function(){var e=this.$createElement,t=this._self._c||e;return t("div",[t("sales-report")],1)}),[],!1,null,null,null);t.default=component.exports}}]);

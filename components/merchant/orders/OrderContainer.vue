@@ -171,6 +171,7 @@ export default {
         { text: "Size", value: "size" },
         { text: "Color", value: "color" },
         { text: "Total", value: "subtotal" },
+        { text: "Contact Number", value: "contact_number" },
         { text: "Status", value: "status" },
         { text: "Action", value: "opt" },
         ,
@@ -192,6 +193,7 @@ export default {
         status:status=='Accept' ? 'To Ship' : 'Declined',
         user_id:item.user_id,
         image:item.image,
+        contact_number:item.contact_number,
         descriptions:"Your item is now accepted"
       },{
         headers:{

@@ -242,6 +242,7 @@ export default {
         form_data.append("size_label", this.sizes_label);
         form_data.append("color_label", this.color_label);
         form_data.append("size_price", this.sizes_price);
+        form_data.append("numBuy", 0);
         form_data.append("user_id", localStorage.getItem("id"));
         if (this.isAdd) {
           form_data.append("remaining_stocks", this.events.stocks);
