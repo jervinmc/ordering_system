@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{619:function(n,e,t){"use strict";t.r(e);var o={components:{InventoryReportContainer:t(604).default}},r=t(97),component=Object(r.a)(o,(function(){var n=this.$createElement,e=this._self._c||n;return e("div",[e("inventory-report-container")],1)}),[],!1,null,null,null);e.default=component.exports}}]);
