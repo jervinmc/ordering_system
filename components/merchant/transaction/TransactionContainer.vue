@@ -123,6 +123,11 @@
           ></v-date-picker>
         </v-menu>
        </v-col>
+       <v-col>
+         <v-select v-model="filterStatus" outlined @change="filterStat" :items="['Delivered','To Ship']">
+
+         </v-select>
+       </v-col>
     <v-data-table
       class="pa-5"
       :search="search"
@@ -198,6 +203,7 @@ export default {
   data() {
     return {
       date:[],
+      filterStatus:'',
       eventDate:false,
       search: "",
       category: "",
@@ -240,6 +246,14 @@ export default {
     },
   },
   methods: {
+    filterStat(){
+      this.items_all = []
+      for(let key in this.events){
+        if(this.events[key].status ==this.filterStatus){
+          this.items_all.push(this.events[key])
+        }
+      }
+    },
       changeDate(){
           this.items_all = []
            for(let key in this.events){
@@ -431,6 +445,7 @@ export default {
           console.log(res.data);
            this.items_all = res.data
           this.events = res.data.filter((data) => data.account_type != "Admin");
+          this.items_all =  res.data.filter((data) => data.account_type != "Admin");
           this.isLoading = false;
         });
     },

@@ -66,7 +66,7 @@
       </v-col>
           <JsonExcel :data="items">
     <div class="text-6 pl-5" style="cursor:pointer">
-      <b>download report</b>
+      <b>Export to Excel</b>
     </div>
     </JsonExcel>
     <v-data-table
